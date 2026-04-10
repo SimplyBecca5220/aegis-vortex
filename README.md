@@ -2,7 +2,7 @@
 
 # AEGIS.VORTEX (url: https://aegisvortex.netlify.app/)
 
-### *The Predatory Guard of GenLayer’s Optimistic Democracy
+### The Predatory Guard of GenLayer’s Optimistic Democracy
 "Turning the Scholar's Gym into a Commander's Bridge."*
 
 
