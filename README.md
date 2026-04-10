@@ -1,20 +1,19 @@
 <div align="center">
-<img src="https://raw.githubusercontent.com/your-username/aegis-vortex/main/public/banner.png" alt="Aegis Vortex Banner" width="100%">
 
-🌌 AEGIS.VORTEX (url: https://aegisvortex.netlify.app/)
+#AEGIS.VORTEX (url: https://aegisvortex.netlify.app/)
 
 The Predatory Guard of GenLayer’s Optimistic Democracy
 "Turning the Scholar's Gym into a Commander's Bridge."
 
 </div>
 
-Overview
+##Overview
 Aegis.Vortex is a high-performance Appealer-as-a-Service and Consensus Visualization platform built specifically for the GenLayer Bradbury Testnet.
 
 While others focus solely on building dApps, Aegis.Vortex focuses on the integrity of the network. We leverage Greyboxing and Shadow Inference to detect non-deterministic drift, protect against Universal Prompt Injections, and maximize rewards for participants who keep the network honest.
 
 
-Key Features
+##Key Features
 1. The Vortex (Consensus Visualizer)
 A real-time, 3D WebGL environment that maps Validator distribution.
 
@@ -35,7 +34,7 @@ Prompt Injection Hardening: Layers of filters that make "Universal Prompt Inject
 4. Reward Optimizer
 Calculates the economic "Sweet Spot" for gas fees. It empirically tests the 60x–100x inference cost hypothesis to ensure being a "Lazy Validator" remains economically non-viable.
 
- Tech Stack
+##Tech Stack
 Frontend: Next.js 14, Tailwind CSS
 
 Motion & 3D: Framer Motion + Three.js (React Three Fiber)
@@ -44,7 +43,7 @@ Intelligence: GenLayer SDK, OpenAI/Anthropic (for Shadow Inference)
 
 Deployment: Netlify
 
- Vision: The Bradbury Gym
+##Vision: The Bradbury Gym
 "Bradbury is where AI meets Blockchain Consensus for the first time."
 
 Aegis.Vortex fulfills the "Active Participation" requirement of the Bradbury milestone by providing:
@@ -55,7 +54,7 @@ Builders with a benchmarking suite to compare Bradbury vs. Studio performance.
 
 Researchers with a dataset of historical transaction "drifts."
 
- Getting Started
+##Getting Started
 Clone the repository
 
 Bash
@@ -69,7 +68,7 @@ Run the Vortex
 Bash
 npm run dev
 
-GenLayer Constitution Compliance
+##GenLayer Constitution Compliance
 Aegis.Vortex is designed to be a "Guardian" of the network. All "Shadow Appeals" are executed in accordance with the proposed governance roadmap to ensure a healthy, decentralized ecosystem.
 
 <div align="center">
