@@ -10,7 +10,7 @@ export function ConstitutionChecker() {
   const [status, setStatus] = useState<"idle" | "checking" | "banned" | "passed" | "error">("idle");
   const [reasoning, setReasoning] = useState("");
 
-  const handleCheck = () => {
+  const handleCheck = async () => {
     if (!transaction.trim()) return;
 
     let parsedPayload;
@@ -23,22 +23,41 @@ export function ConstitutionChecker() {
     }
 
     setStatus("checking");
-    setReasoning("Analyzing against off-chain GenLayer constitution...");
+    setReasoning("Querying GenLayer Consensus AI (GPT-4 & Claude)...");
     
-    // Simulate Greybox AI check delay
-    setTimeout(() => {
-      const rawDrift = Math.random() * 0.08;
-      const drift = rawDrift.toFixed(3);
-      const stringified = JSON.stringify(parsedPayload).toLowerCase();
-
-      if (stringified.includes("exploit") || stringified.includes("reentrancy") || rawDrift > 0.04) {
+    try {
+      const response = await fetch("/api/simulate", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ payload: parsedPayload }),
+      });
+      
+      const data = await response.json();
+      
+      if (!response.ok) {
+        throw new Error(data.error || "Failed to simulate");
+      }
+      
+      const { drift, openai, claude } = data;
+      const numDrift = parseFloat(drift);
+      
+      if (openai === "MALICIOUS" || claude === "MALICIOUS" || numDrift > 0.04) {
         setStatus("banned");
-        setReasoning(`CRITICAL DRIFT DETECTED: Drift of ${drift}% exceeds threshold. Transaction violates the Optimistic Democracy Guidelines. Validator staked SLASHED.`);
+        setReasoning(
+          `CRITICAL DRIFT DETECTED: Float variance of ${drift}%. ${
+            openai !== claude 
+              ? "GPT-4 and Claude DISAGREE on intent." 
+              : "Multiple Validators flagged MALICIOUS intent."
+          } Validator staked SLASHED.`
+        );
       } else {
         setStatus("passed");
         setReasoning(`Simulation Complete. Drift: ${drift}%. Status: SUCCESS. Consensus Achieved.`);
       }
-    }, 1500);
+    } catch (err: any) {
+      setStatus("error");
+      setReasoning(`NETWORK SIMULATION ERROR: ${err.message}`);
+    }
   };
 
   return (
