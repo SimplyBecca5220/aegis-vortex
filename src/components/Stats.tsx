@@ -74,6 +74,17 @@ function StatCard({ title, value, trend, icon, desc }: { title: string, value: s
 }
 
 function DiversityOptimizerCard() {
+  const [selectedModel, setSelectedModel] = useState("Llama 3");
+  
+  const models = [
+    { name: "Llama 3", usage: 80, recommendation: "Mixtral 8x7B", bonus: "+15%" },
+    { name: "GPT-4", usage: 50, recommendation: "Claude 3", bonus: "+10%" },
+    { name: "Claude 3", usage: 30, recommendation: "Mixtral 8x7B", bonus: "+5%" },
+    { name: "Mixtral 8x7B", usage: 10, recommendation: null, bonus: "MAX" },
+  ];
+
+  const current = models.find(m => m.name === selectedModel) || models[0];
+
   return (
     <motion.div 
       initial={{ opacity: 0, y: 20 }}
@@ -84,16 +95,38 @@ function DiversityOptimizerCard() {
       <div className="flex justify-between items-start mb-2 relative z-10">
         <div>
           <h3 className="text-teal-neon font-mono text-xs uppercase tracking-widest mb-1">Model Diversity Optimizer</h3>
-          <div className="text-sm font-bold text-white mb-2">The Wizard&apos;s Recommendation:</div>
+          <div className="text-sm font-bold text-white mb-2">Select Your Validator LLM:</div>
         </div>
         <div className="p-2 bg-obsidian-light rounded-lg border border-teal-neon/20">
           <Network className="w-5 h-5 text-teal-neon" />
         </div>
       </div>
-      <div className="relative z-10 text-xs text-gray-300 font-mono leading-relaxed bg-obsidian/60 p-3 rounded border border-white/5">
-        &gt; 80% of validators are using <span className="text-white">Llama 3</span>.<br/>
-        &gt; ACTION: Switch to <span className="text-teal-neon font-bold">Mixtral 8x7B</span>.<br/>
-        &gt; REWARD: Earn +15% GenLayer Foundation bonus for network health.
+
+      <div className="relative z-10 mb-3">
+        <select 
+          value={selectedModel}
+          onChange={(e) => setSelectedModel(e.target.value)}
+          className="w-full bg-obsidian-light border border-teal-neon/30 text-white text-sm rounded p-2 focus:outline-none focus:ring-1 focus:ring-teal-neon font-mono"
+        >
+          {models.map(m => (
+            <option key={m.name} value={m.name}>{m.name}</option>
+          ))}
+        </select>
+      </div>
+
+      <div className="relative z-10 text-xs text-gray-300 font-mono leading-relaxed bg-obsidian/60 p-3 rounded border border-white/5 h-[80px] flex flex-col justify-center">
+        <div>&gt; {current.usage}% of validators use <span className="text-white">{current.name}</span>.</div>
+        {current.recommendation ? (
+          <>
+            <div>&gt; ACTION: Switch to <span className="text-teal-neon font-bold">{current.recommendation}</span>.</div>
+            <div>&gt; REWARD: <span className="text-teal-neon font-bold">{current.bonus}</span> Health Bonus.</div>
+          </>
+        ) : (
+          <>
+            <div>&gt; ACTION: Stay the course!</div>
+            <div>&gt; REWARD: <span className="text-teal-neon font-bold">{current.bonus}</span> Diversity Bonus.</div>
+          </>
+        )}
       </div>
     </motion.div>
   );
