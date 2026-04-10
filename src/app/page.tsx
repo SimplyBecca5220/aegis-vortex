@@ -44,7 +44,7 @@ export default function Home() {
           {/* Constitution Checker Area */}
           <div className="mt-auto grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
             <div className="flex flex-col justify-end">
-              <div className="glass-panel p-6 rounded-xl border-crimson-alarm/20">
+              <div className="glass-panel p-6 rounded-xl border-crimson-alarm/20 terminal-monitor">
                 <h3 className="font-mono text-crimson-alarm uppercase tracking-widest text-xs mb-2">Live Appeals</h3>
                 <div className="text-gray-400 font-mono text-sm leading-relaxed">
                   <span className="text-white">ID: tx-8492...</span> Drift detected: 8.2% &gt; $\epsilon$<br/>

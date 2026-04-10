@@ -40,9 +40,33 @@ body {
     rgba(0, 240, 255, 0.05) 0px,
     rgba(0, 240, 255, 0.05) 1px,
     transparent 1px,
-    transparent 3px
+  transparent 3px
   );
   pointer-events: none;
   opacity: 0.2;
   z-index: 0;
+}
+
+@keyframes scanline {
+  0% { top: -10px; }
+  100% { top: 100%; }
+}
+
+.terminal-monitor {
+  position: relative;
+  overflow: hidden;
+  text-shadow: 0 0 2px rgba(255, 255, 255, 0.3);
+}
+
+.terminal-monitor::after {
+  content: "";
+  position: absolute;
+  top: -10px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: rgba(255, 42, 42, 0.3);
+  box-shadow: 0 0 10px rgba(255, 42, 42, 0.8), 0 0 5px rgba(255, 42, 42, 0.4);
+  animation: scanline 4s linear infinite;
+  pointer-events: none;
 }
