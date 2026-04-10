@@ -13,24 +13,30 @@ export function ConstitutionChecker() {
   const handleCheck = () => {
     if (!transaction.trim()) return;
 
-    if (!transaction.includes('{')) {
+    let parsedPayload;
+    try {
+      parsedPayload = JSON.parse(transaction);
+    } catch (e) {
       setStatus("error");
       setReasoning("PROTOCOL VIOLATION: Invalid Payload. Please provide valid JSON data.");
       return;
     }
 
     setStatus("checking");
-    setReasoning("Analyizing against off-chain GenLayer constitution...");
+    setReasoning("Analyzing against off-chain GenLayer constitution...");
     
     // Simulate Greybox AI check delay
     setTimeout(() => {
-      const drift = (Math.random() * 0.05).toFixed(3);
-      if (transaction.toLowerCase().includes("exploit") || transaction.toLowerCase().includes("reentrancy")) {
+      const rawDrift = Math.random() * 0.08;
+      const drift = rawDrift.toFixed(3);
+      const stringified = JSON.stringify(parsedPayload).toLowerCase();
+
+      if (stringified.includes("exploit") || stringified.includes("reentrancy") || rawDrift > 0.04) {
         setStatus("banned");
-        setReasoning(`CRITICAL DRIFT DETECTED: Drift of ${drift}% exceeds threshold. Transaction violates the Optimistic Democracy Guidelines Section 4: Deterministic Guardrails.`);
+        setReasoning(`CRITICAL DRIFT DETECTED: Drift of ${drift}% exceeds threshold. Transaction violates the Optimistic Democracy Guidelines. Validator staked SLASHED.`);
       } else {
         setStatus("passed");
-        setReasoning(`Simulation Complete. Drift: ${drift}%. Status: COMPLIANT.`);
+        setReasoning(`Simulation Complete. Drift: ${drift}%. Status: SUCCESS. Consensus Achieved.`);
       }
     }, 1500);
   };
