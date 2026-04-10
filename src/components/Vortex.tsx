@@ -4,7 +4,7 @@ import { useRef, useMemo } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import * as THREE from "three";
 
-function Particles({ count = 5000 }) {
+function Particles({ count = 800 }) {
   const mesh = useRef<THREE.InstancedMesh>(null);
   
   const dummy = useMemo(() => new THREE.Object3D(), []);
@@ -84,10 +84,10 @@ function Particles({ count = 5000 }) {
 export function Vortex() {
   return (
     <div className="absolute inset-0 z-0 opacity-80 pointer-events-none">
-      <Canvas camera={{ fov: 75, position: [0, 0, 80] }}>
+      <Canvas camera={{ fov: 75, position: [0, 0, 80] }} style={{ pointerEvents: 'none' }}>
         <fog attach="fog" args={["#050508", 40, 110]} />
         <ambientLight intensity={0.5} />
-        <Particles count={6000} />
+        <Particles count={800} />
       </Canvas>
       <div className="absolute inset-0 bg-gradient-to-t from-obsidian via-transparent to-obsidian" />
     </div>

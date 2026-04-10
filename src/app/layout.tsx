@@ -24,8 +24,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={`${fontSans.variable} ${fontMono.variable} antialiased selection:bg-teal-neon/30`}>
+    <html lang="en" suppressHydrationWarning>
+      <body className={`${fontSans.variable} ${fontMono.variable} antialiased selection:bg-teal-neon/30`} suppressHydrationWarning>
         {children}
       </body>
     </html>
