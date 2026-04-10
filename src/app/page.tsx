@@ -1,65 +1,63 @@
-import Image from "next/image";
+import { Vortex } from "@/components/Vortex";
+import { Stats } from "@/components/Stats";
+import { ConstitutionChecker } from "@/components/ConstitutionChecker";
+import { Shield } from "lucide-react";
 
 export default function Home() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+    <main className="min-h-screen relative overflow-hidden bg-obsidian text-foreground">
+      {/* 3D Visualizer Background */}
+      <Vortex />
+      
+      {/* Main Content Overlay */}
+      <div className="relative z-10 container mx-auto px-6 py-12 lg:px-12 flex flex-col min-h-screen">
+        
+        {/* Header */}
+        <header className="flex justify-between items-center mb-16">
+          <div className="flex items-center gap-3">
+            <Shield className="w-8 h-8 text-teal-neon" />
+            <h1 className="text-3xl font-black tracking-tighter uppercase text-white drop-shadow-[0_0_10px_rgba(0,240,255,0.5)]">
+              Aegis<span className="text-teal-neon text-opacity-80">.</span>Vortex
+            </h1>
+          </div>
+          <div className="font-mono text-xs tracking-widest text-teal-neon/60 border border-teal-neon/30 px-3 py-1 rounded bg-teal-neon/5">
+            GENLAYER TESTNET BRADBURY
+          </div>
+        </header>
+
+        <div className="flex-grow flex flex-col">
+          {/* Tagline / Intro */}
+          <div className="max-w-2xl mb-12">
+            <h2 className="text-xl md:text-2xl font-mono text-gray-300 font-light mb-4">
+              Predatory Consensus <span className="text-white font-bold">Engine</span>.
+            </h2>
+            <p className="text-sm text-gray-500 font-mono leading-relaxed">
+              Automate "Shadow Simulations" to identify non-deterministic drift. 
+              Punish malicious validators. Secure the Optimistic Democracy. 
+              The Scholar's Gym refined into a Commander's Bridge.
+            </p>
+          </div>
+
+          {/* Stats & Optimizer */}
+          <Stats />
+
+          {/* Constitution Checker Area */}
+          <div className="mt-auto grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+            <div className="flex flex-col justify-end">
+              <div className="glass-panel p-6 rounded-xl border-crimson-alarm/20">
+                <h3 className="font-mono text-crimson-alarm uppercase tracking-widest text-xs mb-2">Live Appeals</h3>
+                <div className="text-gray-400 font-mono text-sm leading-relaxed">
+                  <span className="text-white">ID: tx-8492...</span> Drift detected: 8.2% &gt; $\epsilon$<br/>
+                  Triggering automated appeal on <span className="text-crimson-alarm">Validator #042</span>.<br/>
+                  &gt; Slashed 1,200 $GEN stake.
+                </div>
+              </div>
+            </div>
+            
+            <ConstitutionChecker />
+          </div>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
+      </div>
+    </main>
   );
 }
