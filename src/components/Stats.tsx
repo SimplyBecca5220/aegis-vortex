@@ -1,21 +1,45 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Activity, Network, Zap } from "lucide-react";
 
 export function Stats() {
+  const [drift, setDrift] = useState(0.040);
+  const [appeals, setAppeals] = useState(1432);
+
+  useEffect(() => {
+    const driftInterval = setInterval(() => {
+      setDrift(prev => {
+        const change = (Math.random() - 0.5) * 0.002;
+        return Math.max(0, prev + change);
+      });
+    }, 2000);
+
+    const appealInterval = setInterval(() => {
+      if (Math.random() > 0.8) {
+        setAppeals(prev => prev + 1);
+      }
+    }, 4500);
+
+    return () => {
+      clearInterval(driftInterval);
+      clearInterval(appealInterval);
+    };
+  }, []);
+
   return (
     <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
       <StatCard 
         title="Network Drift" 
-        value="0.04%" 
+        value={`${drift.toFixed(3)}%`} 
         trend="-0.01% / hr" 
         icon={<Activity className="w-5 h-5 text-crimson-alarm" />}
         desc="Difference between on-chain & shadow consensus"
       />
       <StatCard 
         title="Appeals Won" 
-        value="1,432" 
+        value={appeals.toLocaleString()} 
         trend="+12 today" 
         icon={<Zap className="w-5 h-5 text-teal-neon" />}
         desc="Total malicious nodes slashed"
